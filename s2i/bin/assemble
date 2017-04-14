@@ -1,0 +1,15 @@
+#!/bin/bash -e
+
+echo "---> Installing application source"
+cp -Rf /tmp/src/. ./
+
+echo "---> Building Spring Boot application from source"
+echo "--> # MVN_ARGS = $MVN_ARGS"
+if [ -f "mvnw" ]; then
+  ./mvnw clean package $MVN_ARGS
+else
+  mvn clean package $MVN_ARGS
+fi
+
+# Fix source directory permissions
+fix-permissions ./

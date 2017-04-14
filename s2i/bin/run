@@ -1,0 +1,15 @@
+#!/bin/bash -e
+#
+# S2I run script for the 'keyhole-spring-boot-s2i' image.
+# The run script executes the server that runs your application.
+#
+# For more information see the documentation:
+#	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
+#
+APP_TARGET=${APP_TARGET:-target}
+echo "---> Starting Spring Boot application"
+echo "--> # APP_TARGET = $APP_TARGET"
+echo "--> # JAVA_OPTS = $JAVA_OPTS"
+echo "---> Running application from jar ($(find $APP_TARGET -name *.jar)) ..."
+echo echo "---> Running application from jar ($(find $APP_TARGET -name *.jar)) ..."
+exec java -Djava.security.egd=file:/dev/./urandom -jar `find $APP_TARGET -name *.jar` $APP_OPTIONS
